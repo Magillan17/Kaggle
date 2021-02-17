@@ -16,7 +16,7 @@ df = pd.read_csv('train.csv')
 
 df = pd.get_dummies(df, ['cat0', 'cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7', 'cat8', 'cat9'])
 y = df['target']
-df = df.drop(['target','cat6_G'], axis=1)
+df = df.drop(['target','cat6_G', 'id'], axis=1)
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(df, y, random_state=17, test_size=0.2)
@@ -47,6 +47,7 @@ print("--- %s seconds ---" % (time.time() - start_time))
 
 df = pd.read_csv('./test.csv')
 df = pd.get_dummies(df, ['cat0', 'cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7', 'cat8', 'cat9'])
+df = df.drop(['id'], axis=1)
 answer = grid_search.predict(df)
 
 sub = pd.read_csv('sample_submission.csv')
